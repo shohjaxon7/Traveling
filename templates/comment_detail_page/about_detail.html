@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ About.name }}</title>
+</head>
+<body>
+   <img src="{{ about.img.url }}" alt="{{ about.name}}">
+   <h1>{{ About.name}}</h1>
+   <p>{{ About.title}}</p>
+   <p>{{ About.text}}</p>
+
+
+   <h2>Comment</h2>
+   {% for comment in about.comment.all %}
+       <p><strong>{{ comment.user.username }}:</strong>{{ comment.text }}</p>
+   {% empty %}
+        <p> No comment yet.</p>
+   {% endfor %}
+
+   {% if user.is_authenticated %}
+         <h3>Add a Comment</h3>
+         <form action="{% url 'add_comment' about.id %}" method="post" >
+             {% csrf_token %}
+             <textarea name="text" placeholder="Izoh yozing............"></textarea>
+         </form>
+   {% else %}
+          <p>Izoh qoldiring va qo'ng'iroqni kuting .....</p>
+   {% endif %}
+</body>
+</html>
+{% endblock content %}

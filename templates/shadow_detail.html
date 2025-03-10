@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<h1>{{shadow.bio}}</h1>
+<img src="{{shadow.img.url}}">
+<p>{{shadow.price}}</p>
+
+<h2>Coments</h2>
+{% for coment in shadow.comment.all %}
+    <p><strong>{{ comment.user.username }}:</strong> {{ comment.text }}</p>
+{% empty %}
+    <p>No comments yet.</p>
+{% endfor %}
+
+{% if user.is_authenticated %}
+    <h3>Add a Comment</h3>
+    <form action="{% url 'add_comment' shadow.id %}" method="post">
+        {% csrf_token %}
+        <textare name="text" placeholder="Izoh yozing...."></textare>
+        <button type="submit">Jo'natish<button>
+        </form>
+    {% else %}
+        <p>Izoh qoldirish uchun, iltimos, tizimga kiring.</p>
+    {% endif %}
+
+{% endblock content %}

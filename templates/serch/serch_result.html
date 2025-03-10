@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block content %}
+<!--<h1>Search Results for "{{ query }}"</h1>-->
+
+{% if about %}
+    {% if about %}
+        <h2>About Us</h2>
+        <ul>
+            {% for a in about %}
+                <h1><li><a href="{% url 'about_detail' a.pk %}">{{ a.name }}...</a></li></h1>
+            {% endfor %}
+        </ul>
+    {% endif %}
+{% else %}
+    <p>No results found.</p>
+{% endif %}
+{% endblock content %} %}
