@@ -1,5 +1,5 @@
 
-from lib2to3.fixes.fix_input import context
+
 
 from django.contrib.auth.decorators import login_required
 from django.http import Http404, HttpResponse, HttpResponseForbidden
@@ -9,8 +9,8 @@ from sqlparse.sql import Comment
 from blog.forms import PostForms
 from blog.models import *
 
-
-# Create your views here.
+#
+# # Create your views here.
 
 def a404(request):
     return render(request,"404.html",context={})
@@ -182,6 +182,10 @@ def add_comment(request, abo_id):
 
 
 
+
+def about_detail(request, pk):
+    about = get_object_or_404(About, pk=pk)  # Berilgan ID bo'yicha ob'ektni olish
+    return render(request, 'myapp/about_detail.html', {'about': about})
 
 
 
